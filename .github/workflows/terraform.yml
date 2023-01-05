@@ -13,8 +13,8 @@ jobs:
     name: 'Terraform'
     runs-on: ubuntu-latest
     environment: production
-    env:
-      working-directory: 'dev-stage'
+#    env:
+#      working-directory: 'dev-stage'
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
@@ -34,22 +34,22 @@ jobs:
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
-      working-directory:  ${{ env.working-directory }}
+#      working-directory:  ${{ env.working-directory }}
       run: terraform init
 
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
-      working-directory:  ${{ env.working-directory }}
+#      working-directory:  ${{ env.working-directory }}
       run: terraform fmt -check
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
-      working-directory:  ${{ env.working-directory }}
+#      working-directory:  ${{ env.working-directory }}
       run: terraform plan -input=false
 
       # On push to "main", build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terraform Apply
-      working-directory:  ${{ env.working-directory }}
+#      working-directory:  ${{ env.working-directory }}
       if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
       run: terraform apply -auto-approve -input=false
