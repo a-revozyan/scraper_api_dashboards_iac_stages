@@ -10,30 +10,30 @@ terraform {
 }
 
 module "s3" {
-  source = "git@github.com:arevozyan/scraper_api_dashboards_iac_modules//tf_modules/s3?ref=v0.0.1"
+  source = "git::https://github.com:arevozyan/scraper_api_dashboards_iac_modules//tf_modules/s3?ref=v0.0.1"
   env    = var.stage
 }
 
 module "vpc" {
-  source = "git@github.com:arevozyan/scraper_api_dashboards_iac_modules//tf_modules/vpc?ref=v0.0.1"
+  source = "git::https://github.com:arevozyan/scraper_api_dashboards_iac_modules//tf_modules/vpc?ref=v0.0.1"
   env    = var.stage
 }
 
 module "iam" {
   depends_on              = [module.s3, module.vpc]
-  source = "git::https://github.com:arevozyan/scraper_api_dashboards_iac_modules//tf_modules/nlb?ref=v0.0.1"
+  source = "git::https://github.com:arevozyan/scraper_api_dashboards_iac_modules//tf_modules/iam?ref=v0.0.1"
   cars_data_s3_bucket_arn = module.s3.cars_data_s3_bucket_arn
   env                     = var.stage
 }
 
 module "ecr" {
   depends_on = [module.iam]
-  source = "git::https://github.com:arevozyan/scraper_api_dashboards_iac_modules//tf_modules/nlb?ref=v0.0.1"
+  source = "git::https://github.com:arevozyan/scraper_api_dashboards_iac_modules//tf_modules/ecr?ref=v0.0.1"
   env    = var.stage
 }
 
 module "sgs" {
-  source = "git::https://github.com:arevozyan/scraper_api_dashboards_iac_modules//tf_modules/nlb?ref=v0.0.1"
+  source = "git::https://ithub.com:arevozyan/scraper_api_dashboards_iac_modules//tf_modules/sgs?ref=v0.0.1"
 #  source = "../../modules/sgs"
   vpc_id = module.vpc.vpc_id
   env    = var.stage
@@ -41,7 +41,7 @@ module "sgs" {
 
 module "ecs" {
   depends_on              = [module.iam, module.ecr]
-  source                  = "git::https://github.com:arevozyan/scraper_api_dashboards_iac_modules//tf_modules/nlb?ref=v0.0.1"
+  source                  = "git::https://github.com:arevozyan/scraper_api_dashboards_iac_modules//tf_modules/ecs?ref=v0.0.1"
   ecs_app_task_role       = module.iam.app_task_role_arn
   ecs_app_execution_role  = module.iam.app_execution_role_arn
   sel_repository_arn      = module.ecr.aws_ecr_repository_arn_selenium
