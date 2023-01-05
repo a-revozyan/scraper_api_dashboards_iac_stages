@@ -35,7 +35,7 @@ jobs:
     - name: Terraform Init
       run: cd dev_stage && terraform init
       env:
-        TOKEN: ${{ secrets.TF_API_TOKEN }}
+        GITHUB_TOKE: ${{ secrets.TF_API_TOKEN }}
 
 
     # Checks that all Terraform configuration files adhere to a canonical format
