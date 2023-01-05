@@ -6,10 +6,6 @@ on:
   pull_request:
     branches: [ "main" ]
 
-defaults:
-  run:
-    working-directory: dev-stage
-
 permissions:
   contents: read
 
@@ -41,7 +37,8 @@ jobs:
     - name: Terraform Init
       run: cd dev_stage && terraform init
       with:
-        ssh-private-key: ${{ secrets.SECRET_KEY01 }}
+        token: ${{ TOKEN_TF_MODULES }}
+
 
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
