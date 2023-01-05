@@ -64,6 +64,5 @@ module "nlb" {
   source                = "git@github.com:arevozyan/scraper_api_dashboards_iac_modules//tf_modules/nlb?ref=v0.0.1"
   vpc_id                = module.vpc.vpc_id
   frontend_subnet_ids   = module.vpc.frontend-subnet_ids
-#  ecs_api01_service_id  = module.ecs.api01_service_id
   env                   = var.stage
 }
