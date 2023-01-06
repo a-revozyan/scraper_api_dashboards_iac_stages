@@ -15,6 +15,10 @@ terraform {
   }
 }
 
+provider "aws" {
+  region = "us-east-2"
+}
+
 module "ecs" {
   source                 = "../../modules/ecs/"
   ecs_app_task_role      = data.terraform_remote_state.first_step.outputs.app_task_role_arn
