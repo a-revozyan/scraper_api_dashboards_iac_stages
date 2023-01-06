@@ -4,7 +4,6 @@ terraform {
     aws = {
       source  = "hashicorp/aws"
       version = "4.48.0"
-      region  = "us-east-2"
     }
   }
 
@@ -14,6 +13,10 @@ terraform {
     key            = "dev_stage/scraperapidash/terraform.tfstate"
     region         = "us-east-2"
   }
+}
+
+provider "aws" {
+  region = "us-east-2"
 }
 
 module "s3" {
