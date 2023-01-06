@@ -10,3 +10,4 @@ viz/aws/credentials
 .terraform/
 .csvс
 .terraform.lock.hcl
+terraform.tfstate
