@@ -1,7 +1,3 @@
-provider "aws" {
-  region = "us-east-2"
-}
-
 resource "aws_s3_bucket" "carsdatascraperapidash1" {
   bucket = "carsdatascraperapidash1"
   tags = {

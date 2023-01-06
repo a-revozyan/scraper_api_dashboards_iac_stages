@@ -1,7 +1,3 @@
-#output "backend-subnet_ids" {
-#  description = "backend subnets' ids"
-#  value       = coalescelist(aws_subnet.backend_subnet.*.id)
-#}
 output "backend-subnet_ids" {
   description = "backend subnets' ids"
 #  value       = coalescelist(aws_subnet.backend_subnet.*.id)
