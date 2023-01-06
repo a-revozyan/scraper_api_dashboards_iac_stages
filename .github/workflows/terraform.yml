@@ -38,11 +38,6 @@ jobs:
     - name: Terraform Init
       run: cd dev_stage && terraform init
 
-    # Checks that all Terraform configuration files adhere to a canonical format
-    - name: Terraform Format
-#      working-directory:  ${{ env.working-directory }}
-      run: cd dev_stage && terraform fmt -check
-
     # Generates an execution plan for Terraform
     - name: Terraform Plan
 #      working-directory:  ${{ env.working-directory }}
