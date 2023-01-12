@@ -53,6 +53,10 @@ jobs:
         --url 'https://api.github.com/repos/arevozyan/scraper_api_dashboards/actions/workflows/docker-image.yml/dispatches' \
         --header 'authorization: Bearer ${{secrets.ACCESS_TOKEN_APP_REPO}}' \
         --data '{"ref": "main"}'
+
+    - name: Sleep for 300 seconds
+      run: sleep 300s
+      shell: bash
 #        curl -X POST \
 #        -H "Authorization: Bearer ${{secrets.ACCESS_TOKEN_APP_REPO}}" \
 #        -H "Accept: application/vnd.github.v3+json" \
