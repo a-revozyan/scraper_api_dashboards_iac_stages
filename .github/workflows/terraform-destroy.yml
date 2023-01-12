@@ -27,10 +27,10 @@ jobs:
           terraform_version: 1.3.6
 
       # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
-      - name: Terraform Init - 2st step
+      - name: Terraform Init
         run: cd dev_stage/second_step && terraform init
       
-      - name: Terraform Destroy - 2nd step
+      - name: Terraform Destroy
         run: cd dev_stage/second_step && terraform destroy -auto-approve -input=false
         
       - name: Terraform Init - 1st step
