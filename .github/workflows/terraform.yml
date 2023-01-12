@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   terraform_first_step:
-    name: 'Terraform'
+    name: 'Terraform - FIRST STEP'
     runs-on: ubuntu-latest
     environment: production
     env:
@@ -45,9 +45,16 @@ jobs:
     - name: Terraform Apply
       run: cd dev_stage/first_step && terraform apply -auto-approve -input=false
 
+    - name: Build and push images to ECRs
+      run: | 
+        curl -X POST \
+        -H "Authorization: Bearer ${{secrets.ACCESS_TOKEN_APP_REPO}}" \
+        -H "Accept: application/vnd.github.v3+json" \
+        https://api.github.com/repos/arevozyan/scraper_api_dashboards/actions/workflows/docker-image.yml/dispatches \
+        -d '{"ref": "main"}
 
   terraform_second_step:
-    name: 'Terraform'
+    name: 'Terraform - SECOND STEP'
     runs-on: ubuntu-latest
     environment: production
     env:
