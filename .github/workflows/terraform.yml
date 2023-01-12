@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   terraform_first_step:
-    name: 'Terraform - FIRST STEP'
+    name: 'Terraform - FIRST STEP - VPC, ECR, S3, IAM'
     runs-on: ubuntu-latest
     environment: production
     env:
@@ -60,7 +60,7 @@ jobs:
 
   terraform_second_step:
     needs: [terraform_first_step]
-    name: 'Terraform - SECOND STEP'
+    name: 'Terraform - SECOND STEP - ECS, NLB'
     runs-on: ubuntu-latest
     environment: production
     env:
