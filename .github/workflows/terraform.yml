@@ -48,14 +48,20 @@ jobs:
       run: cd dev_stage/first_step && terraform apply -auto-approve -input=false
 
     - name: Build and push images to ECRs
-      run: | 
-        curl -X POST \
-        -H "Authorization: Bearer ${{secrets.ACCESS_TOKEN_APP_REPO}}" \
-        -H "Accept: application/vnd.github.v3+json" \
-        https://api.github.com/repos/arevozyan/scraper_api_dashboards/actions/workflows/docker-image.yml/dispatches \
-        -d '{"ref": "main"}
+      run: |
+        curl --request POST \
+        --url 'https://api.github.com/repos/arevozyan/scraper_api_dashboards/actions/workflows/docker-image.yml/dispatches' \
+        --header 'authorization: Bearer ${{secrets.ACCESS_TOKEN_APP_REPO}}' \
+        --data '-d '{"ref": "main"}'
+#        curl -X POST \
+#        -H "Authorization: Bearer ${{secrets.ACCESS_TOKEN_APP_REPO}}" \
+#        -H "Accept: application/vnd.github.v3+json" \
+#        https://api.github.com/repos/arevozyan/scraper_api_dashboards/actions/workflows/docker-image.yml/dispatches \
+#        -d '{"ref": "main"}
+
 
   terraform_second_step:
+    needs: [terraform_first_step]
     name: 'Terraform - SECOND STEP'
     runs-on: ubuntu-latest
     environment: production
